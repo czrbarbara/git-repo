@@ -1,0 +1,26 @@
+from collections import Counter
+
+def first_unique_char(s: str) -> int:
+    count = Counter(s)  # 計算每個字元出現的次數
+    for i, char in enumerate(s):
+        if count[char] == 1:
+            return i
+    return -1
+
+# 測試案例
+test_cases = {
+    "abcdefgfedcba": 6,           # 'g'
+    "abcdeffedcba": -1,           # 無唯一字元
+    "zabcdefgfedcba": 0,          # 'z' 在開頭
+    "abcdefgfedcbaz": 13,         # 'z' 在結尾
+    "a": 0,                       # 單一字元
+    "aaaaaa": -1,                 # 全部相同
+    "": -1,                       # 空字串
+    "aAbBcC": 0,                  # 大小寫敏感，'a'
+    "112233!@#": 6                # '!' 是唯一字元
+}
+
+# 執行測試
+for input_str, expected in test_cases.items():
+    result = first_unique_char(input_str)
+    print(f"Input: {input_str!r} → Output: {result} (預期: {expected}) {'✅' if result == expected else '❌'}")
